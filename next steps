@@ -1,0 +1,18 @@
+usermodel:
+full name-string
+email-string
+password-string
+contact-number
+cart-string
+orders-string
+isadmin-boolean
+picture-db
+
+product model:
+iamge
+name
+price
+discount
+bgcolor
+panelcolor
+textcolor
