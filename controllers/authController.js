@@ -2,6 +2,7 @@ const userModel = require('../models/user-model');
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const{generateToken}= require("../utils/generateToken")
+const productModel = require('../models/product-model');
 
 module.exports.registerUser= async function(req,res){
     try{
@@ -39,12 +40,18 @@ module.exports.loginUser=async function(req,res){
     let user=await userModel.findOne({email:email});
     if(!user) return res.send("Email or Password incorrect")
 
-    bcrypt.compare(password,user.password,function(err,result){
+    bcrypt.compare(password,user.password,async function(err,result){
         if(result){
             let token=generateToken(user);
             res.cookie("token",token);
-            res.send("you can login")
+            const products = await productModel.find(); // Replace 'ProductModel' with your actual model name
+            console.log(products);
+            res.render('shop', { products });
         }
         else return res.send("Email or Password incorrect")
     });
 };
+// module.exports.logout=function(req,res){
+//     res.cookie("token","");
+//     res.redirect("/")
+// };
