@@ -1,6 +1,5 @@
 const userModel = require('../models/user-model');
 const bcrypt=require("bcrypt");
-const jwt=require("jsonwebtoken");
 const{generateToken}= require("../utils/generateToken")
 const productModel = require('../models/product-model');
 
@@ -44,14 +43,20 @@ module.exports.loginUser=async function(req,res){
         if(result){
             let token=generateToken(user);
             res.cookie("token",token);
-            const products = await productModel.find(); // Replace 'ProductModel' with your actual model name
+            const products = await productModel.find(); 
             console.log(products);
             res.render('shop', { products });
         }
         else return res.send("Email or Password incorrect")
     });
 };
-// module.exports.logout=function(req,res){
-//     res.cookie("token","");
-//     res.redirect("/")
-// };
+module.exports.logoutUser=(req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Logout failed.');
+        }
+        res.clearCookie('connect.sid'); 
+        res.redirect('/'); 
+    });
+};

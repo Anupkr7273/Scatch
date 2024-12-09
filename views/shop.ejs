@@ -20,6 +20,14 @@
                 <a class="block w-fit mb-2" href="">Availability</a>
                 <a class="block w-fit mb-2" href="">Discount</a>
             </div>
+            <!-- Logout button -->
+            <div class="mt-10">
+                <form action="/users/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md">
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
         <div class="w-[75%] flex flex-col gap-5 h-screen">
             <div class="flex items-start gap-5">
@@ -39,7 +47,7 @@
                                 </h4>
                             </div>
                             <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                                <i class="ri-add-line"></i>
+                                <i class="ri-add -line"></i>
                             </a>
                         </div>
                     </div>
@@ -47,4 +55,4 @@
             </div>
         </div>
     </div>
-    <%- include('./partials/footer') %>
+<%- include('./partials/footer') %>
